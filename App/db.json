@@ -1,0 +1,20 @@
+{
+    "categories": [
+        {
+            "id": 1,
+            "name": "desserts"
+        },
+        {
+            "id": 2,
+            "name": "breakfast"
+        },
+        {
+            "id": 3,
+            "name": "lunch"
+        },
+        {
+            "id": 4,
+            "name": "drinks"
+        }
+    ]
+}
