@@ -1,26 +1,22 @@
 import { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Categories from '../components/Categories'
-import axios from 'axios'
 import Checkout from '../components/Checkout'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDataProducts } from '../store/productsSlice'
 
 export default function Home() {
-  const [dataProducts, setDataProducts] = useState([])
-  const getDataProducts = async () => {
-    try {
-      let response = await axios.get('http://localhost:3003/products')
-      setDataProducts(response.data)
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
+  const dispatch = useDispatch()
+  const navbarState = useSelector((state) => state.navbar)
+  const dataProducts = useSelector((state) => state.products.productList)
 
   useEffect(() => {
-    getDataProducts()
-  }, [])
+    dispatch(getDataProducts())
+  }, [navbarState.search, navbarState.sort])
+
   return (
     <>
-      <div className='w-screen h-full bg-[#ECBEAE] px-5 py-7'>
+      <div className='w-7/12 bg-[#ECBEAE] px-5 py-7'>
         <Categories />
         <div className='grid grid-cols-4 gap-3 my-4'>
           {dataProducts.map((dataProduct) => (

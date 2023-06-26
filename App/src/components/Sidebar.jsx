@@ -3,8 +3,8 @@ import { Outlet } from 'react-router-dom'
 export default function Sidebar() {
   return (
     <>
-      <div className='flex'>
-        <div className='flex flex-col items-center w-36 overflow-hidden text-blue-950 bg-[#ECBEAE] border-r-2 border-gray-600'>
+      <div className='flex min-h-screen'>
+        <div className='flex flex-col items-center w-1/12 overflow-hidden text-blue-950 bg-[#ECBEAE] border-r-2 border-gray-600'>
           <div className='flex flex-col items-center'>
             <button className='flex flex-col items-center py-2 mt-4 rounded hover:bg-blue-950 hover:text-white'>
               <svg
