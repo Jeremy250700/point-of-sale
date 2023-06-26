@@ -1,38 +1,19 @@
 import { useEffect, useState } from 'react'
 import Card from '../components/Card'
 import Categories from '../components/Categories'
-import axios from 'axios'
 import Checkout from '../components/Checkout'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { getDataProducts } from '../store/productsSlice'
 
 export default function Home() {
+  const dispatch = useDispatch()
   const navbarState = useSelector(state => state.navbar)
-  const [dataProducts, setDataProducts] = useState([])
-
-  const result = () => {
-    switch (navbarState.sort) {
-      case 'Product Name':
-        return `http://localhost:3003/products/?q=${navbarState.search}&_sort=title`
-      case 'Product Price':
-        return `http://localhost:3003/products/?q=${navbarState.search}&_sort=price`
-      default:
-        return `http://localhost:3003/products/?q=${navbarState.search}`
-    }
-  }
-
-  const getDataProducts = async () => {
-    try {
-      const generatedLink = result()
-      let response = await axios.get(generatedLink)
-      setDataProducts(response.data)
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
+  const dataProducts = useSelector(state => state.products.productList)
 
   useEffect(() => {
-    getDataProducts()
+    dispatch(getDataProducts())
   }, [navbarState.search, navbarState.sort])
+
   return (
     <>
       <div className='w-screen h-full bg-[#ECBEAE] px-5 py-7'>
