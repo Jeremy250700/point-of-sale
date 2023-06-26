@@ -1,10 +1,41 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+
 export default function Navbar() {
+  const optionSort = ['Product Name', 'Product Price']
+  const [sort, setSort] = useState(optionSort[0])
+  const [dataProducts, setDataProducts] = useState([])
+  const [search, setSearch] = useState('')
+
+  const result = () => {
+    switch (sort) {
+      case 'Product Name':
+        return `http://localhost:3003/products/?q=${search}&_sort=title`
+      case 'Product Price':
+        return `http://localhost:3003/products/?q=${search}&_sort=price`
+      default:
+        return `http://localhost:3003/products/?q=${search}`
+    }
+  }
+
+  const getDataProducts = async () => {
+    const r = result()
+
+    await axios
+      .get(r)
+      .then((response) => setDataProducts(response.data))
+      .catch((error) => console.log(error.message))
+  }
+
+  useEffect(() => {
+    getDataProducts()
+  }, [sort, search])
   return (
     <>
-      <div className='flex w-full bg-sky-500 justify-between py-2'>
+      <div className='flex w-full bg-blue-950 justify-between py-2'>
         <div className='flex'>
-          <button className='my-auto mx-7 font-bold text-3xl text-gray-800'>
-            POINT OF SALE
+          <button className='my-auto mx-7 font-bold text-3xl text-[#ECBEAE]'>
+            SANS CAKE
           </button>
           <div className='flex bg-white my-3 mx-4'>
             <svg
@@ -25,14 +56,21 @@ export default function Navbar() {
               className='peer h-full w-96 outline-none border-none text-sm text-gray-700 pr-2'
               type='text'
               id='search'
+              onChange={(e) => setSearch(e.target.value)}
               placeholder='Search something..'
             />
           </div>
           <div className='my-auto mx-3'>
-            <select className='text-sm font-bold text-gray-600 w-30 bg-white border-none'>
-              <option>SORT BY</option>
-              <option>PRICE</option>
-              <option>NAME</option>
+            <select
+              value={sort}
+              onChange={(e) => setSort(e.target.value)}
+              className='text-sm font-bold text-gray-600 w-30 bg-white border-none'
+            >
+              {optionSort.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
           </div>
           <button className='my-auto mx-3 py-1 px-3 bg-[#ffc600] rounded-md flex'>
@@ -61,7 +99,7 @@ export default function Navbar() {
             viewBox='0 0 24 24'
             stroke-width='1.5'
             stroke='currentColor'
-            class='w-12 h-12 text-white'
+            class='w-12 h-12 text-[#ECBEAE]'
           >
             <path
               stroke-linecap='round'
@@ -69,9 +107,9 @@ export default function Navbar() {
               d='M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z'
             />
           </svg>
-          <div className='mr-10 my-auto px-2 text-white'>
+          <div className='mr-10 my-auto px-2 text-[#ECBEAE]'>
             <h1 className='font-bold text-2xl '>USER 1</h1>
-            <h4 className='leading-none text-sm text-gray-800 font-bold text-left'>
+            <h4 className='leading-none text-sm text-white font-bold text-left'>
               Cashier 1
             </h4>
           </div>

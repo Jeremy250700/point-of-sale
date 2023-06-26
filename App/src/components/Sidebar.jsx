@@ -4,9 +4,9 @@ export default function Sidebar() {
   return (
     <>
       <div className='flex'>
-        <div className='flex flex-col items-center w-32 max-h-screen h-screen overflow-hidden text-gray-900 bg-gray-200 border-r-2 border-gray-600'>
+        <div className='flex flex-col items-center w-36 overflow-hidden text-blue-950 bg-[#ECBEAE] border-r-2 border-gray-600'>
           <div className='flex flex-col items-center'>
-            <button className='flex flex-col items-center py-2 mt-4 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 mt-4 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 className='w-6 h-6 stroke-current'
                 xmlns='http://www.w3.org/2000/svg'
@@ -23,7 +23,7 @@ export default function Sidebar() {
               </svg>
               <h1 className='text-center text-sm font-bold px-2 pb-1'>HOME</h1>
             </button>
-            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -41,7 +41,7 @@ export default function Sidebar() {
 
               <h1 className='text-center text-sm font-bold px-2 pb-1'>SALES</h1>
             </button>
-            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'
@@ -59,7 +59,7 @@ export default function Sidebar() {
                 CUSTOMER
               </h1>
             </button>
-            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -79,7 +79,7 @@ export default function Sidebar() {
                 CASHIER
               </h1>
             </button>
-            <button class='flex flex-col items-center py-2 my-2 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'
@@ -99,7 +99,7 @@ export default function Sidebar() {
                 PRODUCTS
               </h1>
             </button>
-            <button class='flex flex-col items-center py-2 my-2 rounded hover:bg-sky-500 hover:text-white'>
+            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 fill='none'

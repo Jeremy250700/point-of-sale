@@ -1,22 +1,33 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 export default function Categories() {
+  const [dataCategories, setDataCategories] = useState([])
+  const getDataCategories = async () => {
+    try {
+      let response = await axios.get('http://localhost:3003/categories')
+      setDataCategories(response.data)
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
+  useEffect(() => {
+    getDataCategories()
+  }, [])
   return (
     <>
-      <div className='flex'>
-        <button className='w-28 text-base mx-5 border-b-2 border-orange-500 hover:bg-gray-300'>
-          All
+      <div className='flex justify-center'>
+        <button className='w-28 py-1 text-base mx-5 rounded-md bg-blue-950 text-white hover:bg-white hover:text-blue-950'>
+          ALL
         </button>
-        <button className='w-28 text-base  mx-5 border-b-2 border-green-500 hover:bg-gray-300'>
-          DESSERTS
-        </button>
-        <button className='w-28 text-base mx-5 border-b-2 border-sky-500 hover:bg-gray-300'>
-          BREAKFAST
-        </button>
-        <button className='w-28 text-base mx-5 border-b-2 border-purple-500 hover:bg-gray-300'>
-          LUNCH
-        </button>
-        <button className='w-28 text-base mx-5 border-b-2 border-red-500 hover:bg-gray-300'>
-          DRINKS
-        </button>
+        {dataCategories.map((dataCategory) => (
+          <button
+            className='w-28 py-1 text-base mx-5 rounded-md bg-blue-950 text-white hover:bg-white hover:text-blue-950 uppercase'
+            key={dataCategory.id}
+          >
+            {dataCategory.name}
+          </button>
+        ))}
       </div>
     </>
   )
