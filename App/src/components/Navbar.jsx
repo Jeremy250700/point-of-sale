@@ -1,35 +1,11 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from "react-redux"
+import { optionSort, setSearch, setSort } from '../store/navbarSlice'
+
 
 export default function Navbar() {
-  const optionSort = ['Product Name', 'Product Price']
-  const [sort, setSort] = useState(optionSort[0])
-  const [dataProducts, setDataProducts] = useState([])
-  const [search, setSearch] = useState('')
+  const dispatch = useDispatch()
+  const navbarState = useSelector(state => state.navbar)
 
-  const result = () => {
-    switch (sort) {
-      case 'Product Name':
-        return `http://localhost:3003/products/?q=${search}&_sort=title`
-      case 'Product Price':
-        return `http://localhost:3003/products/?q=${search}&_sort=price`
-      default:
-        return `http://localhost:3003/products/?q=${search}`
-    }
-  }
-
-  const getDataProducts = async () => {
-    const r = result()
-
-    await axios
-      .get(r)
-      .then((response) => setDataProducts(response.data))
-      .catch((error) => console.log(error.message))
-  }
-
-  useEffect(() => {
-    getDataProducts()
-  }, [sort, search])
   return (
     <>
       <div className='flex w-full bg-blue-950 justify-between py-2'>
@@ -56,14 +32,15 @@ export default function Navbar() {
               className='peer h-full w-96 outline-none border-none text-sm text-gray-700 pr-2'
               type='text'
               id='search'
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => dispatch(setSearch(e.target.value))}
+              value={navbarState.search}
               placeholder='Search something..'
             />
           </div>
           <div className='my-auto mx-3'>
             <select
-              value={sort}
-              onChange={(e) => setSort(e.target.value)}
+              value={navbarState.sort}
+              onChange={(e) => dispatch(setSort(e.target.value))}
               className='text-sm font-bold text-gray-600 w-30 bg-white border-none'
             >
               {optionSort.map((option) => (
