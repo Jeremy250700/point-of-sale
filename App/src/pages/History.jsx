@@ -21,7 +21,7 @@ export default function History() {
   }
   useEffect(() => {
     getDataTransactions()
-  }, [transactions])
+  }, [])
   return (
     <>
       <div className='flex justify-center min-h-screen bg-[#ECBEAE] w-full py-5'>
