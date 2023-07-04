@@ -3,6 +3,7 @@ import Home from './pages/Home'
 import Layout from './components/Layout'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import History from './pages/History'
 export default function App() {
   return (
     <BrowserRouter>
@@ -10,6 +11,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Home />}></Route>
+          <Route path='/history' element={<History />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

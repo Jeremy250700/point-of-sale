@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { optionSort, setSearch, setSort } from '../store/navbarSlice'
+import { Link, useNavigate } from 'react-router-dom'
 
 export default function Navbar() {
   const dispatch = useDispatch()
@@ -49,23 +50,27 @@ export default function Navbar() {
               ))}
             </select>
           </div>
-          <button className='my-auto mx-3 py-1 px-3 bg-[#ffc600] rounded-md flex'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              stroke-width='1.5'
-              stroke='currentColor'
-              className='w-7 h-7 mr-2 text-gray-600'
-            >
-              <path
-                stroke-linecap='round'
-                stroke-linejoin='round'
-                d='M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12'
-              />
-            </svg>
-            <h1 className='my-auto font-bold text-gray-600'>HISTORY</h1>
-          </button>
+          <div className='my-auto'>
+            <Link to={'/history'}>
+              <button className='mx-3 py-1 px-3 bg-[#ffc600] rounded-md flex'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke-width='1.5'
+                  stroke='currentColor'
+                  className='w-7 h-7 mr-2 text-gray-600'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    d='M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12'
+                  />
+                </svg>
+                <h1 className='my-auto font-bold text-gray-600'>HISTORY</h1>
+              </button>
+            </Link>
+          </div>
         </div>
 
         <div className='my-auto flex mr-5'>

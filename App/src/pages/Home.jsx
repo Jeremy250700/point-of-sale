@@ -34,6 +34,7 @@ export default function Home() {
                 title={dataProduct.title}
                 price={dataProduct.price}
                 image={dataProduct.image}
+                stock={dataProduct.stock}
               />
             </button>
           ))}

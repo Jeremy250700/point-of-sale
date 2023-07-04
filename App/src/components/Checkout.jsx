@@ -1,17 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { addToCart, decrease, remove, totals } from '../store/cartSlice'
+import { addToCart, clear, decrease, remove, totals } from '../store/cartSlice'
 import { useEffect, useState } from 'react'
+import axios from 'axios'
+import Swal from 'sweetalert2/dist/sweetalert2.all.min.js'
 
 export default function Checkout() {
   const cart = useSelector((state) => state.cart)
   const dispatch = useDispatch()
 
-  const [bayar, setBayar] = useState({ bayar: 0 })
-  const [amount, setAmount] = useState({
-    paid_amount: bayar.bayar,
-    charged_amount: cart.cartTotalPrice,
-    change_amount: bayar.bayar - cart.cartTotalPrice,
-  })
+  const [bayar, setBayar] = useState(0)
 
   const handleRemoveCart = (item) => {
     dispatch(remove(item))
@@ -27,8 +24,59 @@ export default function Checkout() {
     dispatch(addToCart(item))
   }
 
-  const handleCheckout = () => {
-    console.log(amount)
+  const formatDate = (date) => {
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const day = String(date.getDate()).padStart(2, '0')
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+    const seconds = String(date.getSeconds()).padStart(2, '0')
+
+    return `${year}/${month}/${day} ${hours}:${minutes}:${seconds}`
+  }
+  const date = new Date()
+  const formattedDate = formatDate(date)
+
+  const handleCheckout = async () => {
+    const transactionsData = {
+      paid_amount: Number(bayar),
+      charged_amount: cart.cartTotalPrice,
+      change_amount: bayar - cart.cartTotalPrice,
+      date: formattedDate,
+    }
+    if (transactionsData.charged_amount == 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Pilih minimal 1 item',
+      })
+    } else if (transactionsData.change_amount < 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Uang yang dibayarkan kurang',
+      })
+    } else {
+      await axios.post('http://localhost:3003/transactions', transactionsData)
+      let getTransaction = await axios.get(`http://localhost:3003/transactions`)
+      let getTransactionId = getTransaction.data.length - 1
+
+      for (let i = 0; i < cart.cartItems.length; i++) {
+        await axios.post('http://localhost:3003/transactions_detail', {
+          transactionId: getTransaction.data[getTransactionId].id,
+          productId: cart.cartItems[i].id,
+          quantity: cart.cartItems[i].cartQuantity,
+          subtotal: cart.cartItems[i].cartQuantity * cart.cartItems[i].price,
+        })
+        let prevStock = await axios.get(
+          `http://localhost:3003/products/${cart.cartItems[i].id}`
+        )
+        await axios.patch(
+          `http://localhost:3003/products/${cart.cartItems[i].id}`,
+          { stock: prevStock.data.stock - cart.cartItems[i].cartQuantity }
+        )
+      }
+      setBayar(0)
+      dispatch(clear())
+    }
   }
   useEffect(() => {
     dispatch(totals())
@@ -129,19 +177,20 @@ export default function Checkout() {
             </h1>
           </div>
           <div className='flex justify-between text-lg my-3'>
-            <h1>Dibayar:</h1>
+            <h1>Paid:</h1>
             <input
               className='text-blue-950 font-bold h-10'
               type='number'
-              onChange={(e) => setBayar({ ...bayar, bayar: e.target.value })}
+              value={bayar}
+              onChange={(e) => setBayar(e.target.value)}
             />
           </div>
           <div className='flex justify-between text-lg'>
-            <h1>Kembalian:</h1>
+            <h1>Change:</h1>
             <h1>
               {'Rp. ' +
                 new Intl.NumberFormat('en-US').format(
-                  bayar.bayar - cart.cartTotalPrice
+                  bayar - cart.cartTotalPrice
                 )}
             </h1>
           </div>
