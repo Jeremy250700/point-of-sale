@@ -1,9 +1,13 @@
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import Swal, { swal } from 'sweetalert2/dist/sweetalert2.all.min.js'
+import { Dialog } from '@headlessui/react'
+import Modal from '../components/Modal'
 
 export default function History() {
   const [transactions, setTransactions] = useState([])
+  const [isOpenModal, setIsOpenModal] = useState(false)
+
   const getDataTransactions = async () => {
     const item = await axios.get('http://localhost:3003/transactions')
     setTransactions(item.data)
@@ -17,7 +21,7 @@ export default function History() {
       console.log(dataProduct.data[i].product.price)
       console.log(dataProduct.data[i].product.image)
     }
-    Swal.fire({})
+    setIsOpenModal(true)
   }
   useEffect(() => {
     getDataTransactions()
@@ -111,6 +115,10 @@ export default function History() {
           </div>
         </div>
       </div>
+
+      <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} title="Detail Produk">
+        ini contoh modal
+      </Modal>
     </>
   )
 }
