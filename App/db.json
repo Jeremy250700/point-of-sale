@@ -24,7 +24,7 @@
       "title": "Chiffon Mocha Jeruk",
       "price": 80000,
       "image": "https://iili.io/HPwEg94.png",
-      "stock": 10
+      "stock": 9
     },
     {
       "id": 2,
@@ -48,7 +48,7 @@
       "title": "Chiffon Mocha Pandan",
       "price": 80000,
       "image": "https://iili.io/HPwEOMX.png",
-      "stock": 10
+      "stock": 9
     },
     {
       "id": 5,
@@ -80,7 +80,7 @@
       "title": "Klepon Cake",
       "price": 350000,
       "image": "https://iili.io/HPSP2ja.jpg",
-      "stock": 10
+      "stock": 5
     },
     {
       "id": 9,
@@ -152,7 +152,7 @@
       "title": "Mini Macaroni Schotel",
       "price": 8000,
       "image": "https://iili.io/HPUB3dB.jpg",
-      "stock": 10
+      "stock": 7
     }
   ],
   "transactions": [
@@ -169,6 +169,20 @@
       "change_amount": 20000,
       "date": "2023/07/03 16:55:00",
       "id": 2
+    },
+    {
+      "paid_amount": 200000,
+      "charged_amount": 184000,
+      "change_amount": 16000,
+      "date": "2023/07/04 13:49:53",
+      "id": 3
+    },
+    {
+      "paid_amount": 1800000,
+      "charged_amount": 1750000,
+      "change_amount": 50000,
+      "date": "2023/07/04 17:48:51",
+      "id": 4
     }
   ],
   "transactions_detail": [
@@ -199,6 +213,34 @@
       "quantity": 1,
       "subtotal": 80000,
       "id": 4
+    },
+    {
+      "transactionId": 3,
+      "productId": 1,
+      "quantity": 1,
+      "subtotal": 80000,
+      "id": 5
+    },
+    {
+      "transactionId": 3,
+      "productId": 4,
+      "quantity": 1,
+      "subtotal": 80000,
+      "id": 6
+    },
+    {
+      "transactionId": 3,
+      "productId": 17,
+      "quantity": 3,
+      "subtotal": 24000,
+      "id": 7
+    },
+    {
+      "transactionId": 4,
+      "productId": 8,
+      "quantity": 5,
+      "subtotal": 1750000,
+      "id": 8
     }
   ]
 }

@@ -7,6 +7,7 @@ import Modal from '../components/Modal'
 export default function History() {
   const [transactions, setTransactions] = useState([])
   const [isOpenModal, setIsOpenModal] = useState(false)
+  const [detailTransactions, setDetailTransactions] = useState([])
 
   const getDataTransactions = async () => {
     const item = await axios.get('http://localhost:3003/transactions')
@@ -16,11 +17,7 @@ export default function History() {
     const dataProduct = await axios.get(
       `http://localhost:3003/transactions_detail?transactionId=${transactionId}&_expand=product`
     )
-    for (let i = 0; i < dataProduct.data.length; i++) {
-      console.log(dataProduct.data[i].product.title)
-      console.log(dataProduct.data[i].product.price)
-      console.log(dataProduct.data[i].product.image)
-    }
+    setDetailTransactions(dataProduct.data)
     setIsOpenModal(true)
   }
   useEffect(() => {
@@ -35,29 +32,29 @@ export default function History() {
               <thead className='rounded-md bg-blue-950 text-white'>
                 <tr>
                   <th className='py-3 px-5 text-center'>NO</th>
-                  <th className='py-3 px-10 text-center'>DATE</th>
-                  <th className='py-3 px-10 text-center'>TOTAL</th>
-                  <th className='py-3 px-10 text-center'>PAID</th>
-                  <th className='py-3 px-10 text-center'>CHANGE</th>
-                  <th className='py-3 px-5 text-center'>ACTION</th>
+                  <th className='py-3 text-center'>DATE</th>
+                  <th className='py-3 text-center'>TOTAL</th>
+                  <th className='py-3  text-center'>PAID</th>
+                  <th className='py-3  text-center'>CHANGE</th>
+                  <th className='py-3  text-center'>ACTION</th>
                 </tr>
               </thead>
               <tbody>
                 {transactions.map((data, index) => (
                   <tr className='bg-blue-950' key={data.id}>
                     <td className='text-center  text-lg'>{index + 1}</td>
-                    <td className='text-center  text-lg px-3'>{data.date}</td>
-                    <td className='text-center text-lg'>
+                    <td className='text-center  text-lg px-10'>{data.date}</td>
+                    <td className='text-center text-lg px-7'>
                       {'Rp. ' +
                         new Intl.NumberFormat('en-US').format(
                           data.charged_amount
                         )}
                     </td>
-                    <td className='text-center  text-lg'>
+                    <td className='text-center  text-lg px-7'>
                       {'Rp. ' +
                         new Intl.NumberFormat('en-US').format(data.paid_amount)}
                     </td>
-                    <td className='text-center  text-lg'>
+                    <td className='text-center  text-lg px-7'>
                       {'Rp. ' +
                         new Intl.NumberFormat('en-US').format(
                           data.change_amount
@@ -116,8 +113,23 @@ export default function History() {
         </div>
       </div>
 
-      <Modal isOpen={isOpenModal} setIsOpen={setIsOpenModal} title="Detail Produk">
-        ini contoh modal
+      <Modal
+        isOpen={isOpenModal}
+        setIsOpen={setIsOpenModal}
+        title='Detail Produk'
+      >
+        <div className=''>
+          {detailTransactions.map((detail, index) => (
+            <div key={index} className='flex justify-between my-3 text-white'>
+              <div className=' w-1/2'>{detail.product.title}</div>
+              <div className=' w-1/2'>
+                {'Rp. ' +
+                  new Intl.NumberFormat('en-US').format(detail.subtotal)}
+              </div>
+              <div className=' w-1/8'>{detail.quantity}</div>
+            </div>
+          ))}
+        </div>
       </Modal>
     </>
   )
