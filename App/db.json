@@ -20,8 +20,8 @@
   "products": [
     {
       "id": 1,
-      "categoryId": 1,
-      "title": "Chiffon Mocha Jeruk",
+      "categoryId": "1",
+      "title": "Chiffon Mocha Guava",
       "price": 80000,
       "image": "https://iili.io/HPwEg94.png",
       "stock": 9
