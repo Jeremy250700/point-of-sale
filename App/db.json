@@ -153,6 +153,14 @@
       "price": 8000,
       "image": "https://iili.io/HPUB3dB.jpg",
       "stock": 7
+    },
+    {
+      "title": "test12",
+      "categoryId": "2",
+      "price": "5000",
+      "image": "test1",
+      "stock": "10",
+      "id": 18
     }
   ],
   "transactions": [

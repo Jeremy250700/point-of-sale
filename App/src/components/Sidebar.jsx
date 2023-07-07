@@ -83,26 +83,28 @@ export default function Sidebar() {
                 CASHIER
               </h1>
             </button>
-            <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                stroke-width='1.5'
-                stroke='currentColor'
-                class='w-6 h-6'
-              >
-                <path
-                  stroke-linecap='round'
-                  stroke-linejoin='round'
-                  d='M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9'
-                />
-              </svg>
+            <Link to={'/products'}>
+              <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
+                <svg
+                  xmlns='http://www.w3.org/2000/svg'
+                  fill='none'
+                  viewBox='0 0 24 24'
+                  stroke-width='1.5'
+                  stroke='currentColor'
+                  class='w-6 h-6'
+                >
+                  <path
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                    d='M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9'
+                  />
+                </svg>
 
-              <h1 className='text-center text-sm font-bold px-2 pb-1'>
-                PRODUCTS
-              </h1>
-            </button>
+                <h1 className='text-center text-sm font-bold px-2 pb-1'>
+                  PRODUCTS
+                </h1>
+              </button>
+            </Link>
             <button className='flex flex-col items-center py-2 my-2 rounded hover:bg-blue-950 hover:text-white'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
