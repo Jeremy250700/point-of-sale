@@ -4,7 +4,7 @@ import Layout from './components/Layout'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import History from './pages/History'
-import Products from './pages/Products'
+import Products from './pages/Products/Products.jsx'
 export default function App() {
   return (
     <BrowserRouter>
